@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéQuest - Kanto Edition</title>
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: #fff;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER STYLES ===== */
+        .site-header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ffd700;
+            padding: 15px 0;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffd700;
+            transition: transform 0.3s;
+        }
+
+        .logo a:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 2em;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* ===== MAIN GAME CONTAINER ===== */
+        .container {
+            width: 95%;
+            max-width: 1600px;
+            margin: 20px auto;
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2em;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #aaa;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Badges container */
+        .badges-container {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            background: #333;
+            border: 2px solid #666;
+            transition: all 0.3s ease;
+        }
+
+        .badge.earned {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            border-color: #fff;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        /* Region info */
+        .region-info {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .current-region {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .region-levels {
+            color: #aaa;
+            font-size: 1.1em;
+        }
+
+        /* Buddy container */
+        .buddy-container {
+            background: rgba(255, 215, 0, 0.15);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .buddy-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .buddy-label {
+            font-size: 1.1em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .buddy-name {
+            font-size: 1.2em;
+            color: #fff;
+            background: rgba(255, 215, 0, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ffd700;
+        }
+
+        .buddy-progress {
+            flex: 1;
+            min-width: 200px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .buddy-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            transition: width 0.3s ease;
+        }
+
+        .buddy-stats {
+            font-size: 0.9em;
+            color: #ffd700;
+            min-width: 80px;
+        }
+
+        .buddy-change-btn {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: #333;
+            font-weight: bold;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Region selector */
+        .region-selector {
+            margin: 10px 0;
+            flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
+        }
+
+        .region-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            min-width: min-content;
+        }
+
+        .region-btn {
+            padding: 8px 12px;
+            border: 2px solid;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.85em;
+            min-width: 100px;
+            white-space: nowrap;
+        }
+
+        .region-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .region-btn.active {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .region-btn.has-gym::after {
+            content: "🏆";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 1em;
+        }
+
+        .region-icon {
+            font-size: 1.5em;
+        }
+
+        .region-name {
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .region-levels {
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        /* Region button colors */
+        .region-btn.kanto_forest { border-color: #4caf50; }
+        .region-btn.kanto_mountains { border-color: #9e9e9e; }
+        .region-btn.kanto_coast { border-color: #33b5e5; }
+        .region-btn.kanto_city { border-color: #ffbb33; }
+        .region-btn.kanto_volcano { border-color: #ff4444; }
+        .region-btn.kanto_haunted { border-color: #aa66cc; }
+        .region-btn.kanto_safari { border-color: #ff80ab; }
+        .region-btn.kanto_elite { border-color: #ffd700; }
+
+        /* Game screen */
+        .game-screen {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            flex: 1;
+            min-height: 300px;
+            font-size: 1.1em;
+        }
+
+        /* Button grid */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 4px;
+            margin: 8px 0;
+            flex-shrink: 0;
+        }
+
+        button {
+            padding: 6px 3px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Inventory panel */
+        .inventory-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .inventory-panel h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 8px;
+        }
+
+        .inventory-item {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 8px 6px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.85em;
+            transition: background 0.2s;
+        }
+
+        .inventory-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .inventory-item .inv-icon { font-size: 1.4em; display: block; }
+        .inventory-item .inv-name { color: #ccc; font-size: 0.78em; margin: 2px 0; display: block; }
+        .inventory-item .inv-count { color: #ffd700; font-weight: bold; font-size: 1em; display: block; }
+
+        /* Pokemon collection */
+        .pokemon-collection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 5px;
+        }
+
+        /* Pokemon cards */
+        .pokemon-card {
+            background: linear-gradient(145deg, rgba(42, 42, 74, 0.95), rgba(26, 26, 58, 0.95));
+            border-radius: 12px;
+            padding: 10px;
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 2px solid;
+            backdrop-filter: blur(5px);
+        }
+
+        .pokemon-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .pokemon-card.common { border-color: #808080; }
+        .pokemon-card.uncommon { border-color: #4caf50; }
+        .pokemon-card.rare { border-color: #2196f3; }
+        .pokemon-card.superRare { border-color: #9c27b0; }
+        .pokemon-card.ultraRare { border-color: #ff9800; }
+        .pokemon-card.mythical { border-color: #f44336; }
+
+        .pokemon-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .pokemon-card-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .pokemon-card-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 5px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .pokemon-card-image img {
+            image-rendering: pixelated;
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+        }
+
+        .pokemon-card-image span {
+            font-size: 2.8em;
+        }
+
+        .pokemon-card-types {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+        }
+
+        .pokemon-card-type {
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+        }
+
+        /* Type colors */
+        .type-fire { background: #ff4444; }
+        .type-water { background: #33b5e5; }
+        .type-grass { background: #00C851; }
+        .type-electric { background: #ffbb33; color: #333; }
+        .type-psychic { background: #aa66cc; }
+        .type-ice { background: #00bcd4; }
+        .type-dragon { background: #7b1fa2; }
+        .type-dark { background: #424242; }
+        .type-fairy { background: #ff80ab; color: #333; }
+        .type-fighting { background: #d32f2f; }
+        .type-poison { background: #7b1fa2; }
+        .type-ground { background: #8d6e63; }
+        .type-flying { background: #90a4ae; color: #333; }
+        .type-rock { background: #5d4037; }
+        .type-ghost { background: #5e35b1; }
+        .type-steel { background: #607d8b; }
+        .type-normal { background: #9e9e9e; }
+        .type-bug { background: #8bc34a; color: #333; }
+
+        .pokemon-card-hp {
+            font-size: 0.8em;
+            color: #aaa;
+            margin: 3px 0;
+        }
+
+        .pokemon-card-hp-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .pokemon-card-hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4cd964, #34aadc);
+            transition: width 0.2s;
+        }
+
+        .pokemon-card-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 3px 0;
+            padding: 3px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        .pokemon-card-level {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            border: 1px solid #ffd700;
+            color: #ffd700;
+        }
+
+        /* Battle screen */
+        .battle-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .battle-actions button {
+            padding: 10px 6px;
+            font-size: 0.82em;
+            border-radius: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .battle-log {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .log-entry {
+            color: #ffd700;
+            padding: 2px 0;
+        }
+
+        /* Start Menu */
+        .start-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .start-menu-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .start-menu-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .start-menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .start-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .new-game {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .load-game {
+            background: linear-gradient(135deg, #2196F3, #1e88e5);
+            color: white;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #ffd700;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #ffd700;
+        }
+
+        /* Save notification */
+        .save-notification {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px !important;
+            border-radius: 10px !important;
+            font-size: 1em !important;
+            font-weight: bold;
+            z-index: 9999 !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: slideInRight 0.3s ease forwards;
+            max-width: 350px;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ===== BATTLE ANIMATIONS ===== */
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            15% { transform: translateX(-8px); }
+            30% { transform: translateX(8px); }
+            45% { transform: translateX(-6px); }
+            60% { transform: translateX(6px); }
+            75% { transform: translateX(-3px); }
+            90% { transform: translateX(3px); }
+        }
+        @keyframes flashRed {
+            0%,100% { filter: none; }
+            25% { filter: brightness(3) saturate(0) sepia(1) hue-rotate(-30deg); }
+            50% { filter: none; }
+            75% { filter: brightness(2) saturate(0) sepia(1) hue-rotate(-30deg); }
+        }
+        @keyframes flashGold {
+            0%,100% { filter: none; }
+            30% { filter: brightness(3) sepia(1) hue-rotate(10deg); }
+            60% { filter: brightness(1.5); }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes superEffective {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.3) rotate(3deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        @keyframes shinePulse {
+            0%,100% { box-shadow: 0 0 8px #ffd700; }
+            50% { box-shadow: 0 0 30px #ffd700, 0 0 60px #ffd700; }
+        }
+        @keyframes evolveGlow {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(4) saturate(0); }
+            100% { filter: brightness(1); }
+        }
+
+        .hit-shake { animation: shake 0.4s ease; }
+        .hit-flash { animation: flashRed 0.4s ease; }
+        .super-flash { animation: flashGold 0.4s ease; }
+        .pop-in { animation: popIn 0.3s ease forwards; }
+        .shiny-glow { animation: shinePulse 2s infinite; }
+
+        .damage-float {
+            position: fixed;
+            font-size: 1.4em;
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 9998;
+            animation: floatUp 0.9s ease forwards;
+        }
+
+        .effectiveness-banner {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 6px;
+            border-radius: 8px;
+            margin: 5px 0;
+            animation: superEffective 0.4s ease forwards;
+        }
+        .effective-super { background: rgba(255,100,0,0.3); color: #ff8800; border: 1px solid #ff8800; }
+        .effective-not { background: rgba(100,100,255,0.2); color: #8888ff; border: 1px solid #8888ff; }
+        .effective-immune { background: rgba(100,100,100,0.3); color: #888; border: 1px solid #888; }
+        .effective-critical { background: rgba(255,215,0,0.25); color: #ffd700; border: 1px solid #ffd700; }
+
+        /* ===== ACHIEVEMENTS ===== */
+        .achievement-toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            padding: 12px 16px;
+            z-index: 9997;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+            animation: slideInRight 0.4s ease forwards;
+            max-width: 300px;
+        }
+        .achievement-toast .ach-icon { font-size: 1.8em; }
+        .achievement-toast .ach-text { flex: 1; }
+        .achievement-toast .ach-title { color: #ffd700; font-weight: bold; font-size: 0.85em; }
+        .achievement-toast .ach-name { color: #fff; font-size: 0.95em; }
+
+        /* Pokedex modal wider */
+        #pokedexModal .modal-content {
+            max-width: 800px;
+        }
+
+        /* ===== SHOP STYLES ===== */
+        .shop-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255,255,255,0.07);
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 10px;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #333;
+            border-color: #ffd700;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255,215,0,0.15);
+            color: #ffd700;
+        }
+
+        .shop-items {
+            max-height: 55vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        /* ===== POKEMON SCREEN ===== */
+        .pokemon-details-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,215,0,0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .move-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.85em;
+        }
+
+        /* ===== REGION BACKGROUNDS ===== */
+        /* Each region applies a gradient overlay on the body when active */
+        body.region-kanto_forest    { background: linear-gradient(135deg, #1a2e1a 0%, #0d1f0d 50%, #0f3020 100%); }
+        body.region-kanto_mountains { background: linear-gradient(135deg, #2a2a2e 0%, #1a1a26 50%, #2a2030 100%); }
+        body.region-kanto_coast     { background: linear-gradient(135deg, #0d1f3e 0%, #0a1a3a 50%, #0f2a4a 100%); }
+        body.region-kanto_city      { background: linear-gradient(135deg, #1e1e2e 0%, #16162e 50%, #1a1a3a 100%); }
+        body.region-kanto_volcano   { background: linear-gradient(135deg, #2e1a0a 0%, #2a0f00 50%, #3a1500 100%); }
+        body.region-kanto_haunted   { background: linear-gradient(135deg, #1a0a2e 0%, #120520 50%, #1f0a30 100%); }
+        body.region-kanto_safari    { background: linear-gradient(135deg, #1a2a10 0%, #112010 50%, #1a2e14 100%); }
+        body.region-kanto_elite     { background: linear-gradient(135deg, #2e2000 0%, #261800 50%, #3a2800 100%); }
+
+        /* Region info banner with gradient accent */
+        .region-info {
+            transition: background 0.5s, border-color 0.5s;
+        }
+        body.region-kanto_forest    .region-info { border-color: #4caf50; }
+        body.region-kanto_mountains .region-info { border-color: #9e9e9e; }
+        body.region-kanto_coast     .region-info { border-color: #33b5e5; }
+        body.region-kanto_city      .region-info { border-color: #ffbb33; }
+        body.region-kanto_volcano   .region-info { border-color: #ff4444; }
+        body.region-kanto_haunted   .region-info { border-color: #aa66cc; }
+        body.region-kanto_safari    .region-info { border-color: #69f0ae; }
+        body.region-kanto_elite     .region-info { border-color: #ffd700; }
+
+        /* ===== POKEBALL IMAGES ===== */
+        .ball-img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid #ffd700;
+            color: white;
+            margin-top: 20px;
+            padding: 40px 0 20px;
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .footer-section p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin: 10px 0;
+        }
+
+        .footer-section ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #333;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            color: #aaa;
+            margin-top: 40px;
+        }
+
+        .footer-bottom a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-nav ul {
+                justify-content: center;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .button-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Start Menu Overlay -->
+    <div id="startMenu" class="start-menu">
+        <div class="start-menu-content">
+            <h1>🌟 POKÉQUEST</h1>
+            
+            <div class="start-menu-buttons">
+                <button onclick="quickStartFromMenu()" class="start-btn new-game">
+                    <span class="btn-icon">🎮</span>
+                    New Game
+                </button>
+                
+                <button onclick="loadGameFromStart()" class="start-btn load-game">
+                    <span class="btn-icon">📂</span>
+                    Load Game
+                </button>
+            </div>
+            
+            <div class="start-menu-footer">
+                <p style="color:#aaa;">Version 1.0 | 151 Kanto Pokémon</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">🌟</span>
+                    <span class="logo-text">PokéQuest</span>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">🎮 Game</a></li>
+                    <li><a href="how-to-play.html" class="nav-link">📖 How to Play</a></li>
+                    <li><a href="rating.html" class="nav-link">⭐ Rate</a></li>
+                    <li><a href="faq.html" class="nav-link">❓ FAQ</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <div class="container" id="gameContainer" style="display: none;">
+        <div class="header">
+            <h1>🌟 POKÉQUEST 🌟</h1>
+            
+            <!-- Main Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Trainer Level</span>
+                    <span class="stat-value" id="trainerLevel">1</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Pokédex</span>
+                    <span class="stat-value" id="pokedexCount">0/151</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Credits</span>
+                    <span class="stat-value" id="creditCount">10000</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Badges</span>
+                    <span class="stat-value" id="badgeCount">0/8</span>
+                </div>
+            </div>
+
+            <!-- Badges Display -->
+            <div class="badges-container" id="badgesContainer">
+                <div class="badge badge-tooltip" id="badge1" data-tooltip="Boulder Badge">🪨</div>
+                <div class="badge badge-tooltip" id="badge2" data-tooltip="Cascade Badge">💧</div>
+                <div class="badge badge-tooltip" id="badge3" data-tooltip="Thunder Badge">⚡</div>
+                <div class="badge badge-tooltip" id="badge4" data-tooltip="Rainbow Badge">🌈</div>
+                <div class="badge badge-tooltip" id="badge5" data-tooltip="Soul Badge">👻</div>
+                <div class="badge badge-tooltip" id="badge6" data-tooltip="Marsh Badge">🧠</div>
+                <div class="badge badge-tooltip" id="badge7" data-tooltip="Volcano Badge">🌋</div>
+                <div class="badge badge-tooltip" id="badge8" data-tooltip="Earth Badge">🌍</div>
+            </div>
+
+            <!-- Current Region Info -->
+            <div class="region-info" id="regionInfo">
+                <span class="current-region" id="currentRegion">Kanto Forest</span>
+                <span class="region-levels" id="regionLevels">Levels 1-20</span>
+            </div>
+
+            <!-- Buddy Pokémon Display -->
+            <div class="buddy-container" id="buddyContainer" style="display: none;">
+                <div class="buddy-info">
+                    <span class="buddy-label">🤝 Buddy Pokémon:</span>
+                    <span class="buddy-name" id="buddyName">None</span>
+                    <div class="buddy-progress" id="buddyProgress">
+                        <div class="buddy-progress-bar" id="buddyProgressBar" style="width: 0%"></div>
+                    </div>
+                    <span class="buddy-stats" id="buddyStats">0/100 XP</span>
+                    <button class="buddy-change-btn" onclick="ui.showBuddySelection()">Change Buddy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Region Selector -->
+        <div class="region-selector" id="regionSelector"></div>
+
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <h2>Welcome to PokéQuest!</h2>
+            <p>Choose your starter Pokémon to begin your adventure.</p>
+            <div class="pokemon-collection" id="starterSelection"></div>
+        </div>
+
+        <!-- Main Action Buttons -->
+        <div class="button-grid">
+            <button onclick="game.explore()" id="exploreBtn" disabled>🌲 Explore</button>
+            <button onclick="game.challengeGym()" id="gymBtn" disabled>🏆 Gym</button>
+            <button onclick="ui.showPokemon()" id="pokemonBtn" disabled>📋 Pokémon</button>
+            <button onclick="ui.showPC()">🖥️ PC Box</button>
+            <button onclick="ui.openShop()" id="shopBtn" disabled>🏪 Shop</button>
+            <button onclick="ui.showInventory()">🎒 Inventory</button>
+            <button onclick="ui.openPokedex()">📖 Pokédex</button>
+            <button onclick="ui.showAchievements()">🏆 Achievements</button>
+            <button onclick="game.healAllPokemon()" id="healBtn" disabled>💊 Heal</button>
+            <button onclick="ui.openManual()">📚 Manual</button>
+            <button onclick="saveSystem.saveGame()" style="background: #4caf50;">💾 Save</button>
+            <button onclick="saveSystem.loadGame()" style="background: #2196f3;">📂 Load</button>
+            <button onclick="saveSystem.resetGame()" style="background: #f44336;">🔄 Reset</button>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div class="inventory-panel" id="inventoryPanel" style="display: none;">
+            <h3>🎒 Inventory</h3>
+            <div class="inventory-grid" id="inventoryGrid"></div>
+        </div>
+    </div>
+
+    <!-- Shop Modal -->
+    <div id="shopModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="ui.closeShop()">&times;</span>
+            <h2>🛒 Pokémon Shop</h2>
+            <div class="shop-tabs">
+                <button class="tab-btn active" onclick="ui.switchShopTab('items')">Items</button>
+                <button class="tab-btn" onclick="ui.switchShopTab('tms')">TMs</button>
+            </div>
+            <div id="shopItems" class="shop-items"></div>
+            <div id="shopTMs" class="shop-items" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Pokédex Modal -->
+    <div id="pokedexModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="ui.closePokedex()">&times;</span>
+            <h2>📖 Pokédex</h2>
+            <div id="pokedexEntries"></div>
+        </div>
+    </div>
+
+    <!-- Move Info Modal -->
+    <div id="moveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="ui.closeMoveModal()">&times;</span>
+            <h2>⚔️ Type Effectiveness</h2>
+            <div id="moveInfo"></div>
+        </div>
+    </div>
+
+    <!-- Manual Modal -->
+    <div id="manualModal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="margin: 0;">📚 PokéQuest User Manual</h2>
+                <span class="close" onclick="ui.closeManual()" style="font-size: 28px; cursor: pointer; color: #aaa;">&times;</span>
+            </div>
+            <div id="manualContent" style="max-height: 60vh; overflow-y: auto; padding: 10px;"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="ui.closeManual()" style="padding: 12px 40px; background: linear-gradient(135deg, #ffd700, #ffa500); color: #333; border: none; border-radius: 25px; cursor: pointer;">Close Manual</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Move Learning Modal -->
+    <div id="moveLearnModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="ui.closeMoveLearnModal()">&times;</span>
+            <h2>📚 Learn New Move</h2>
+            <div id="moveLearnContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🌟 PokéQuest</h3>
+                <p>The ultimate text-based Pokémon adventure game. Catch, train, and battle your way through Kanto!</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">💬</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">🎮 Play Game</a></li>
+                    <li><a href="how-to-play.html">📖 How to Play</a></li>
+                    <li><a href="rating.html">⭐ Leave a Rating</a></li>
+                    <li><a href="faq.html">❓ FAQ</a></li>
+                    <li><a href="about.html">ℹ️ About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Game Info</h3>
+                <ul>
+                    <li>📊 Version 1.0</li>
+                    <li>🎮 151 Kanto Pokémon</li>
+                    <li>🏆 8 Gym Badges</li>
+                    <li>📅 Updated 2024</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Get updates about new features!</p>
+                <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!'); this.reset();">
+                    <input type="email" placeholder="Your email" style="width:100%; padding:10px; margin-bottom:10px; border:2px solid #ffd700; border-radius:5px; background:rgba(255,255,255,0.1); color:white;">
+                    <button type="submit" style="width:100%; padding:10px; background:#4CAF50; border:none; border-radius:5px; color:white; cursor:pointer;">Send</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; PokéQuest. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+    <script src="ui.js"></script>
+    <script src="save.js"></script>
+    <script>
+    function quickStartFromMenu() {
+        document.getElementById('startMenu').style.display = 'none';
+        document.getElementById('gameContainer').style.display = 'block';
+        
+        if (typeof player !== 'undefined') {
+            player.hasStarter = false;
+            player.pokemon = [];
+            player.unlockedRegions = ['kanto_forest'];
+            currentRegion = 'kanto_forest';
+        }
+        
+        if (typeof ui !== 'undefined' && ui.showStarters) {
+            ui.showStarters();
+        }
+        
+        document.getElementById('exploreBtn').disabled = true;
+        document.getElementById('gymBtn').disabled = true;
+        document.getElementById('pokemonBtn').disabled = true;
+        document.getElementById('shopBtn').disabled = true;
+        document.getElementById('healBtn').disabled = true;
+    }
+
+    function loadGameFromStart() {
+        if (typeof saveSystem !== 'undefined' && saveSystem.loadGame) {
+            saveSystem.loadGame();
+        }
+    }
+
+    window.onload = function() {
+        document.getElementById('startMenu').style.display = 'flex';
+        document.getElementById('gameContainer').style.display = 'none';
+        
+        if (typeof saveSystem !== 'undefined' && saveSystem.resetToDefault) {
+            saveSystem.resetToDefault();
+        }
+    };
+
+    window.onclick = function(event) {
+        const modals = ['shopModal', 'pokedexModal', 'moveModal', 'manualModal', 'moveLearnModal'];
+        modals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    };
+    </script>
+</body>
+</html>

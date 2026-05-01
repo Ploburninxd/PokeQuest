@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link ref="stylesheet" href="headerfooter.css">
+    <title>PokéQuest - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .site-header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #ffd700;
+            padding: 15px 0;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        /* Main Content */
+        .about-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            color: white;
+            flex: 1;
+        }
+
+        h1 {
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #ffd700;
+            margin: 30px 0 15px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 5px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,107,107,0.1));
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .hero-title {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .hero-text {
+            font-size: 1.2em;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .mission-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid #ffd700;
+            text-align: center;
+        }
+
+        .mission-box p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #fff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .timeline {
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .timeline-year {
+            font-size: 1.5em;
+            color: #ffd700;
+            font-weight: bold;
+            min-width: 80px;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h3 {
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+        }
+
+        .member-name {
+            font-size: 1.3em;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .member-bio {
+            color: #ddd;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid #ffd700;
+            color: white;
+            margin-top: 40px;
+            padding: 40px 0 20px;
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin: 10px 0;
+        }
+
+        .footer-section ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-btn {
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            color: #aaa;
+            margin-top: 40px;
+        }
+
+        .footer-bottom a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #ffd700;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-nav ul {
+                justify-content: center;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .timeline-item {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <span style="font-size:2em;">🌟</span>
+                    <span style="color:#ffd700;">PokéQuest</span>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">🎮 Game</a></li>
+                    <li><a href="how-to-play.html" class="nav-link">📖 How to Play</a></li>
+                    <li><a href="rating.html" class="nav-link">⭐ Rate</a></li>
+                    <li><a href="faq.html" class="nav-link">❓ FAQ</a></li>
+                    <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="about-container">
+        <h1>ℹ️ About PokéQuest</h1>
+        
+        <div class="hero-section">
+            <div class="hero-title">🌟 PokéQuest</div>
+            <div class="hero-text">A text-based Pokémon adventure where nostalgia meets modern web technology</div>
+        </div>
+        
+        <div class="mission-box">
+            <p>"Our mission is to bring the joy of Pokémon catching and battling to your browser, creating an accessible and engaging experience for fans old and new."</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">151</div>
+                <div class="stat-label">Pokémon</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Regions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Hours</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free</div>
+            </div>
+        </div>
+        
+        <h2>📖 Story</h2>
+        <p>PokéQuest started as a university project for a Web Technologies course. What began as a simple assignment quickly grew into a passion project as we realized the potential for creating something truly special. We wanted to capture the magic of the original Pokémon games while making them accessible directly in the browser.</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-content">
+                    <h3>Project Start</h3>
+                    <p>Initial concept and development begins as a university assignment</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-content">
+                    <h3>First Playable</h3>
+                    <p>Core battle system and catching mechanics implemented</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-content">
+                    <h3>Beta Release</h3>
+                    <p>Added all 151 Kanto Pokémon, gyms, and buddy system</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <h2>👥 Meet the Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">👨‍💻</div>
+                <div class="member-name">Ye Yint Aung</div>
+                <div class="member-role">Lead Developer</div>
+                <div class="member-bio">Built the battle system and game mechanics.</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-avatar">🎨</div>
+                <div class="member-name">Ye Yint Aung</div>
+                <div class="member-role">UI/UX Designer</div>
+                <div class="member-bio">Created the card designs and made the game look beautiful.</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-avatar">📊</div>
+                <div class="member-name">Ye Yint Aung</div>
+                <div class="member-role">Data Architect</div>
+                <div class="member-bio">Structured the Pokémon database and evolution systems.</div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-avatar">🌐</div>
+                <div class="member-name">Ye Yint Aung</div>
+                <div class="member-role">Web Developer</div>
+                <div class="member-bio">Built the rating system, FAQ, and connected all pages.</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-button">🎮 Play PokéQuest Now</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>🌟 PokéQuest</h3>
+                <p>The ultimate text-based Pokémon adventure game. Catch, train, and battle your way through Kanto!</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">💬</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">🎮 Play Game</a></li>
+                    <li><a href="how-to-play.html">📖 How to Play</a></li>
+                    <li><a href="rating.html">⭐ Leave a Rating</a></li>
+                    <li><a href="faq.html">❓ FAQ</a></li>
+                    <li><a href="about.html">ℹ️ About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Game Info</h3>
+                <ul>
+                    <li>📊 Version 1.0</li>
+                    <li>🎮 151 Kanto Pokémon</li>
+                    <li>🏆 8 Gym Badges</li>
+                    <li>📅 Updated 2024</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Get updates about new features!</p>
+                <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!'); this.reset();">
+                    <input type="email" placeholder="Your email" style="width:100%; padding:10px; margin-bottom:10px; border:2px solid #ffd700; border-radius:5px; background:rgba(255,255,255,0.1); color:white;">
+                    <button type="submit" style="width:100%; padding:10px; background:#4CAF50; border:none; border-radius:5px; color:white; cursor:pointer;">Send</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 PokéQuest. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>

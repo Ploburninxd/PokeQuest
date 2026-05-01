@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéQuest - How to Play</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); min-height:100vh; color:#fff; display:flex; flex-direction:column; }
+        .site-header { background:rgba(26,26,46,0.95); backdrop-filter:blur(10px); border-bottom:2px solid #ffd700; padding:15px 0; }
+        .header-container { max-width:1400px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; }
+        .logo a { display:flex; align-items:center; gap:10px; text-decoration:none; font-size:1.8em; font-weight:bold; color:#ffd700; }
+        .main-nav ul { display:flex; gap:20px; list-style:none; flex-wrap:wrap; }
+        .nav-link { color:white; text-decoration:none; padding:8px 15px; border-radius:20px; transition:all 0.3s; }
+        .nav-link:hover { background:rgba(255,215,0,0.2); color:#ffd700; }
+        .container { max-width:1000px; margin:40px auto; background:rgba(26,26,46,0.95); backdrop-filter:blur(10px); border-radius:20px; padding:40px; border:2px solid #ffd700; box-shadow:0 0 30px rgba(255,215,0,0.2); flex:1; width:calc(100% - 40px); }
+        h1 { color:#ffd700; text-align:center; margin-bottom:30px; font-size:2.2em; }
+        h2 { color:#ffd700; margin:30px 0 12px; padding-bottom:6px; border-bottom:2px solid rgba(255,215,0,0.4); font-size:1.3em; }
+        .step-box { background:rgba(255,255,255,0.06); border-radius:14px; padding:20px; margin:18px 0; border-left:4px solid #ffd700; }
+        .step-box p { color:#ddd; line-height:1.7; margin-bottom:8px; }
+        .step-box p:last-child { margin-bottom:0; }
+        .tip-box { background:rgba(255,215,0,0.08); border-radius:10px; padding:14px 18px; margin:14px 0; border:1px solid rgba(255,215,0,0.4); }
+        .tip-box strong { color:#ffd700; }
+        table { width:100%; border-collapse:collapse; margin:14px 0; }
+        th { background:#ffd700; color:#333; padding:10px 14px; text-align:left; }
+        td { padding:9px 14px; border-bottom:1px solid rgba(255,215,0,0.2); color:#ddd; }
+        tr:hover td { background:rgba(255,215,0,0.05); }
+        .badge-row { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+        .badge-pill { background:rgba(255,255,255,0.08); border:1px solid rgba(255,215,0,0.4); border-radius:20px; padding:6px 14px; font-size:0.88em; color:#ffd700; }
+        .type-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; margin:12px 0; }
+        .type-card { border-radius:10px; padding:8px 12px; font-size:0.85em; font-weight:bold; text-align:center; }
+        .back-button { display:inline-block; padding:12px 30px; background:linear-gradient(135deg,#4CAF50,#45a049); color:white; text-decoration:none; border-radius:25px; font-weight:bold; border:2px solid #ffd700; margin:20px 0; }
+        .site-footer { background:rgba(26,26,46,0.95); border-top:2px solid #ffd700; color:white; margin-top:40px; padding:40px 0 20px; }
+        .footer-container { max-width:1400px; margin:0 auto; padding:0 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:30px; }
+        .footer-section h3 { color:#ffd700; margin-bottom:20px; }
+        .footer-section p { color:#aaa; line-height:1.6; margin-bottom:15px; }
+        .footer-section ul { list-style:none; }
+        .footer-section ul li { margin:10px 0; }
+        .footer-section ul li a { color:#aaa; text-decoration:none; }
+        .footer-section ul li a:hover { color:#ffd700; }
+        .social-links { display:flex; gap:15px; }
+        .social-link { display:inline-block; padding:8px 12px; background:rgba(255,255,255,0.1); border-radius:50%; color:white; text-decoration:none; }
+        .social-link:hover { background:#ffd700; color:#333; }
+        .footer-bottom { text-align:center; padding:20px; border-top:1px solid rgba(255,215,0,0.2); color:#aaa; margin-top:40px; }
+        .footer-bottom a { color:#ffd700; text-decoration:none; }
+        @media(max-width:768px){ .header-container{flex-direction:column;text-align:center;} .main-nav ul{justify-content:center;} .footer-container{grid-template-columns:1fr;text-align:center;} }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <div class="logo"><a href="index.html"><span style="font-size:2em;">🌟</span><span style="color:#ffd700;">PokéQuest</span></a></div>
+        <nav class="main-nav"><ul>
+            <li><a href="index.html" class="nav-link">🎮 Game</a></li>
+            <li><a href="how-to-play.html" class="nav-link">📖 How to Play</a></li>
+            <li><a href="rating.html" class="nav-link">⭐ Rate</a></li>
+            <li><a href="faq.html" class="nav-link">❓ FAQ</a></li>
+            <li><a href="about.html" class="nav-link">ℹ️ About</a></li>
+        </ul></nav>
+    </div>
+</header>
+
+<div class="container">
+    <h1>📖 How to Play PokéQuest</h1>
+
+    <div class="step-box">
+        <h2>1. 🌟 Getting Started</h2>
+        <p>Click <strong>New Game</strong> on the main menu. You will choose one of three starter Pokémon:</p>
+        <div class="badge-row">
+            <span class="badge-pill" style="border-color:#78C850;color:#78C850;">🌿 Bulbasaur — Grass/Poison</span>
+            <span class="badge-pill" style="border-color:#F08030;color:#F08030;">🔥 Charmander — Fire</span>
+            <span class="badge-pill" style="border-color:#6890F0;color:#6890F0;">💧 Squirtle — Water</span>
+        </div>
+        <p>Your starter is a gift — it does not count in your Pokédex. Only wild Pokémon you catch are recorded. Once chosen, press <strong>Explore</strong> to begin!</p>
+    </div>
+
+    <div class="step-box">
+        <h2>2. 🌲 Exploring Regions</h2>
+        <p>Each region has its own set of wild Pokémon and a level range. New regions unlock automatically when your strongest Pokémon reaches the required level.</p>
+        <table>
+            <tr><th>Region</th><th>Level Range</th><th>Gym Leader</th><th>Speciality</th></tr>
+            <tr><td>🌲 Kanto Forest</td><td>1 – 20</td><td>—</td><td>Starter area</td></tr>
+            <tr><td>⛰️ Kanto Mountains</td><td>21 – 35</td><td>Brock</td><td>Rock / Ground</td></tr>
+            <tr><td>🌊 Kanto Coast</td><td>36 – 45</td><td>Misty</td><td>Water</td></tr>
+            <tr><td>🏙️ Kanto City</td><td>46 – 55</td><td>Lt. Surge</td><td>Electric</td></tr>
+            <tr><td>🌿 Kanto Plains</td><td>48 – 57</td><td>Erika</td><td>Grass</td></tr>
+            <tr><td>☠️ Fuchsia City</td><td>52 – 62</td><td>Koga</td><td>Poison</td></tr>
+            <tr><td>🌋 Kanto Volcano</td><td>56 – 65</td><td>Blaine</td><td>Fire</td></tr>
+            <tr><td>👻 Lavender Tower</td><td>66 – 75</td><td>Sabrina</td><td>Psychic</td></tr>
+            <tr><td>🦁 Safari Zone</td><td>76 – 85</td><td>—</td><td>Rare Pokémon</td></tr>
+            <tr><td>🏆 Victory Road</td><td>86 – 100</td><td>Champion Lance</td><td>Dragon</td></tr>
+        </table>
+        <p>When you explore, you have a <strong>70% chance</strong> of finding a wild Pokémon and a <strong>30% chance</strong> of finding items (Pokéballs, potions, or credits).</p>
+    </div>
+
+    <div class="step-box">
+        <h2>3. ⚔️ Battling Wild Pokémon</h2>
+        <p>When a wild Pokémon appears, choose which of your Pokémon to send out. In battle you can:</p>
+        <p><strong>⚔️ Move</strong> — Opens the move selection screen. Each move shows its type, power, accuracy, and effectiveness against the enemy's type. Always pick super effective moves when you can!</p>
+        <p><strong>🔄 Switch</strong> — Swap to a different Pokémon from your party.</p>
+        <p><strong>💊 Potion</strong> — Heal your Pokémon mid-battle.</p>
+        <p><strong>🏃 Run</strong> — Attempt to escape (50% chance).</p>
+
+        <div class="tip-box"><strong>💡 Type Effectiveness:</strong> Fire beats Grass, Water beats Fire, Grass beats Water — and there are many more type matchups! The move screen always tells you before you commit.</div>
+    </div>
+
+    <div class="step-box">
+        <h2>4. 🎣 Catching Pokémon</h2>
+        <p>Weaken the wild Pokémon first — lower HP means a higher catch rate. Then throw a ball:</p>
+        <table>
+            <tr><th>Ball</th><th>Base Catch Rate</th><th>Cost</th></tr>
+            <tr><td>🟤 Poké Ball</td><td>30%</td><td>200 credits</td></tr>
+            <tr><td>🔵 Great Ball</td><td>50%</td><td>500 credits</td></tr>
+            <tr><td>🟡 Ultra Ball</td><td>70%</td><td>1,000 credits</td></tr>
+            <tr><td>💜 Master Ball</td><td>100%</td><td>5,000 credits</td></tr>
+        </table>
+        <div class="tip-box"><strong>💡 Pro Tip:</strong> Get the enemy below 10% HP for a near-guaranteed catch! Watch the "Catch: X%" indicator on the battle screen.</div>
+        <p>If your party is full (6 Pokémon), caught Pokémon are automatically sent to your <strong>PC Box</strong>.</p>
+    </div>
+
+    <div class="step-box">
+        <h2>5. 📈 Levelling, Moves &amp; Evolution</h2>
+        <p>Your Pokémon gain <strong>XP</strong> from battles and catches. When XP reaches the threshold (level × 50), they level up — gaining HP, Attack, and sometimes new moves. At set levels, Pokémon <strong>evolve</strong> into stronger forms automatically.</p>
+        <p>Each Pokémon can know up to <strong>4 moves</strong>. If a new move is available and you already have 4, you choose which one to forget. You can also teach moves using <strong>📀 TMs</strong> bought from the shop — open a Pokémon's details and press <em>Use TM</em>.</p>
+        <p>Use a <strong>🍬 Rare Candy</strong> to instantly level up any Pokémon by one level.</p>
+    </div>
+
+    <div class="step-box">
+        <h2>6. 🏆 Gym Battles</h2>
+        <p>Each gym region has a Leader with a type-specialist team. Press <strong>🏆 Gym</strong> to challenge them. The gym battle works exactly like wild battles — use the Move button, pick type-effective attacks, and defeat all their Pokémon to earn a <strong>badge</strong> and credits.</p>
+        <p>There are <strong>8 badges</strong> to collect: Boulder, Cascade, Thunder, Rainbow, Soul, Volcano, Marsh, and Champion. Collect all 8 to prove you are the Pokémon Champion!</p>
+        <div class="tip-box"><strong>💡 Strategy:</strong> Check the gym's type specialty (shown on the selection screen) and bring Pokémon with super effective moves. Use TMs to fill any type coverage gaps.</div>
+    </div>
+
+    <div class="step-box">
+        <h2>7. 🖥️ PC Box &amp; Party Management</h2>
+        <p>Your party holds up to <strong>6 Pokémon</strong>. Use <strong>🖥️ PC Box</strong> to deposit extras into unlimited storage and withdraw them any time. This lets you build specialist teams for different regions and gyms.</p>
+    </div>
+
+    <div class="step-box">
+        <h2>8. 🤝 Buddy System &amp; 🏅 Achievements</h2>
+        <p>Open any Pokémon's details and tap <strong>Make Buddy</strong> to set a walking partner. As you explore, your buddy gains happiness, unlocking bonuses. There are <strong>18 achievements</strong> to unlock — from your first catch to collecting all 8 badges. Check your progress any time with the <strong>🏆 Achievements</strong> button.</p>
+    </div>
+
+    <div class="step-box">
+        <h2>9. 💾 Saving Your Game</h2>
+        <p>Click <strong>💾 Save</strong> to download a save file. Click <strong>📂 Load</strong> to restore it. Your game auto-saves to the browser every 60 seconds, but always save a file before closing. Use <strong>🔄 Reset</strong> to start fresh — this cannot be undone!</p>
+    </div>
+
+    <div style="text-align:center;margin-top:30px;">
+        <a href="index.html" class="back-button">🎮 Start Playing!</a>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>🌟 PokéQuest</h3>
+            <p>The ultimate text-based Pokémon adventure. Catch, train, and battle through all of Kanto!</p>
+            <div class="social-links">
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">📷</a>
+                <a href="#" class="social-link">💬</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">🎮 Play Game</a></li>
+                <li><a href="how-to-play.html">📖 How to Play</a></li>
+                <li><a href="rating.html">⭐ Leave a Rating</a></li>
+                <li><a href="faq.html">❓ FAQ</a></li>
+                <li><a href="about.html">ℹ️ About</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Game Info</h3>
+            <ul>
+                <li>📊 Version 2.0</li>
+                <li>🎮 151 Kanto Pokémon</li>
+                <li>🏆 8 Gym Badges</li>
+                <li>🌍 10 Regions</li>
+                <li>📅 Updated 2025</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p>Get updates about new features!</p>
+            <form onsubmit="event.preventDefault();alert('Thanks for subscribing!');this.reset();">
+                <input type="email" placeholder="Your email" style="width:100%;padding:10px;margin-bottom:10px;border:2px solid #ffd700;border-radius:5px;background:rgba(255,255,255,0.1);color:white;">
+                <button type="submit" style="width:100%;padding:10px;background:#4CAF50;border:none;border-radius:5px;color:white;cursor:pointer;">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 PokéQuest by Ye Yint Aung. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+</footer>
+</body>
+</html>
